@@ -14,11 +14,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([    
+            GenreSeeder::class,
+            MelodySeeder::class,
+            UserSeeder::class,
+            StatusSeeder::class,
+            SongSeeder::class,
+            MessageSeeder::class,
+            CommentSeeder::class,
+            ReplySeeder::class,
+            FollowSeeder::class,
+            Comment_UserSeeder::class,
+            Reply_UserSeeder::class,
+            Song_UserSeeder::class,
+            Melody_UserSeeder::class,
+            Melody_SongSeeder::class,
+            Song_StatusSeeder::class,
+        ]);
     }
 }
