@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('background');
-            $table->text('overview');
+            $table->string('name')->nullable();
+            $table->text('background')->nullable();
+            $table->text('overview')->nullable();
             $table->string('image')->nullable();
             $table->string('movie')->nullable();
-            $table->string('audio');
+            $table->string('audio')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

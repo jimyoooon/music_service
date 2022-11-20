@@ -13,9 +13,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href='route("index")' :active="request()->routeIs('index')">
+                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
                         {{__('プロフィール') }}
                     </x-nav-link>
+                    <x-nav-link :href='route("profile")' :active="request()->routeIs('profile')">
+                        {{__('投稿画面') }}
+                    </x-nav-link>         
                 </div>
             </div>
             <!-- Settings Dropdown -->

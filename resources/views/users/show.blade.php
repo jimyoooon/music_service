@@ -20,9 +20,6 @@
                         <p>SNS：{{ $user->sns }}</p>
                     </div>
                     <p class="edit">[<a href="/users/{{ $user->id }}/edit">edit</a>]</p>
-                    <div class="footer">
-                        <a href="/index">戻る</a>
-                    </div>
                 </div>
             </div>
         </div>

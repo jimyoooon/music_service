@@ -19,9 +19,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-                'name'=> 'ゆうき',
-                'email'=> '84smt11',
-                'password'=> 'jiminyou0705.',
+                'name'=> 'ゆ',
+                'email'=> '84smt1',
+                'password'=> 'jiminyo0705.',
                 'age'=> '22',
                 'image'=> '"C:\Users\81805\Pictures\Screenshots\スクリーンショット (21).png"',
                 'feeling'=> 'いまはとてもいい気分です。',
