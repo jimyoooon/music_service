@@ -11,6 +11,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class='body'>
+                        <a href='/users/create'>[create]</a>
                         <div class='profile'>
                             @foreach ($users as $user)
                                 <a href="/users/{{ $user->id }}">名前：{{ $user->name }}</a>
@@ -22,7 +23,6 @@
                                 <p class='sns'>SNS：{{ $user->sns }}</p>
                             @endforeach
                         </div>
-                        <a href='/users/create'>[create]</a>
                         <div class='paginate'>
                             {{ $users->links() }}
                         </div>

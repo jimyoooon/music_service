@@ -34,7 +34,7 @@
                                 <input type="submit" value="[保存]">
                             </form>
                         <div class="footer">
-                            <a href="/index">[戻る]</a>
+                            <a href="/users/show">[戻る]</a>
                         </div>
                         </div>
                     </div>
