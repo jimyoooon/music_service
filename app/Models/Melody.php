@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Melody extends Model
 {
     use HasFactory;
+    
+    public function songs(){
+
+    return $this->belongsToMany(Song::class);
+    }   
 }

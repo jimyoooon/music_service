@@ -19,6 +19,7 @@ class Song extends Model
         'background',
         'overview',
         'audio',
+        'image',
         
         ];
         
@@ -28,6 +29,11 @@ class Song extends Model
     public function getPaginateByLimit(int $limit_count = 10)
     {
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+    
+    public function melodies()
+    {
+        return $this->belongsToMany(Melody::class);
     }
 
 }

@@ -18,6 +18,7 @@
                                 <p class='background'>曲の作成背景：{{ $song->background }}</p>
                                 <p class='overview'>曲の概要：{{ $song->overview }}</p>
                                 <p class='audio'>音声ファイル：{{ $song->audio }}</p>
+                                <img src="{{ asset($song->image) }}">
                             @endforeach
                         </div>
                         <div class='paginate'>

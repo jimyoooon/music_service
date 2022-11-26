@@ -12,7 +12,7 @@
                     <div class='body'>
                         <h1 class="title">編集画面</h1>
                         <div class="content">
-                            <form action="/songs/{{ $song->id }}" method="POST">
+                            <form action="/songs/{{ $song->id }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class='content__body'>
@@ -24,11 +24,13 @@
                                     <input type='text' name='song[overview]' value='{{ $song->overview }}'>
                                     <h2>音声ファイル</h2>
                                     <input type='text' name='song[audio]' value="{{ $song->audio }}">
+                                    <h2>画像登録</h2>
+                                    <input type="file" class="form-control-file" name='image' id="image" value='{{ $song->image}}'>
                                 </div>
                                 <input type="submit" value="[保存]">
                             </form>
                         <div class="footer">
-                            <a href="/songs/show">[戻る]</a>
+                            <a href="/songs/{{ $song->id }}">[戻る]</a>
                         </div>
                         </div>
                     </div>

@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="/songs" method="POST">
+                    <form method='POST' action="/songs" enctype="multipart/form-data">
                         @csrf
                         <div class="title">
                             <h2>Name</h2>
@@ -31,6 +31,7 @@
                             <textarea name="song[audio]" placeholder="音声ファイル">{{old("song.audio") }}</textarea>
                             <p class="audio__error" style="color:red">{{ $errors->first('song.audio') }}</p>
                         </div>
+                        <input type="file" name="image">
                         <input type="submit" value="[store]"/>
                     </form>
                     <div class="footer">
