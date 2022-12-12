@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Song;
+use App\Models\Melody;
+use App\Models\User;
 use Storage;
-
+use Illuminate\Support\Facades\Auth;
 
 class SongController extends Controller
 {
-    public function index(Song $song)
+    public function index(Song $song, User $user)
     {
-        return view('songs/index')->with(['songs' => $song->getPaginateByLimit(1)]); 
+        $auth = auth()->user()->id;
+        $user = User::where('id', $auth)->first();
+        return view('songs/index')->with(['songs' => $song->getPaginateByLimit(10)])->with(['users' => $user]);
     }
     
     public function show(Song $song)
@@ -19,25 +23,34 @@ class SongController extends Controller
         return view('songs/show')->with(['song' => $song]);
     }
 
-    public function create(Song $song)
+    public function create(Melody $melody, Song $song)
     {
         
-        return view('songs/create');
+        return view('songs/create')->with(['melodies' => $melody->get()]);
     }
     
     public function store(Request $request, Song $song)
     {
+        $input_song = $request['song'];
+        $input_melodies = $request->melodies_array;  //subjects_arrayはnameで設定した配列名
+        
+        //先にstudentsテーブルにデータを保存
+        $song->fill($input_song)->save();
+        
+        //attachメソッドを使って中間テーブルにデータを保存
+        $song->melodies()->attach($input_melodies); 
+        
+        
+        
         $input = $request['song'];
-        $song->fill($input)->save();
-        $dir = 'sample';
-        $file_name = $request->file('image')->getClientOriginalName();
-        $request->file('image')->storeAs('public/' . $dir, $file_name);
-        // ファイル情報をDBに保存
-        $image = new Song();
-        $image->name = $file_name;
-        $image->image = 'storage/' . $dir . '/' . $file_name;
-        $image->save();
 
+        $song = new Song;
+        $form = $request->all();
+        $image = $request->file('image');
+        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        $song->image = Storage::disk('s3')->url($path);
+        $song->fill($input)->save();
+        
         return redirect('/songs/' . $song->id);
     }
     
@@ -50,21 +63,30 @@ class SongController extends Controller
     public function update(Request $request, Song $song)
     {
         $input_song = $request['song'];
+        $song = new Song;
+        $form = $request->all();
+        $image = $request->file('image');
+        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        $song->image = Storage::disk('s3')->url($path);
+
         $song->fill($input_song)->save();
-        // ディレクトリ名
-        $dir = 'sample';
-        $file_name = $request->file('image')->getClientOriginalName();
-        $request->file('image')->storeAs('public/' . $dir, $file_name);
-        // ファイル情報をDBに保存
-        $image = new Song();
-        $image->name = $file_name;
-        $image->path = 'storage/' . $dir . '/' . $file_name;
-        $image->save();
         return redirect('/songs/' . $song->id);
         
-
-
-
     }
     
+    public function select()
+    {   
+        $user=User::where('overview', null)->where('sns', null)->get();
+        return view('songs/select')->with(['users'=> $user]);
+    }
+    
+    public function home()
+    {
+        return view('songs/home');
+    }
+    
+    public function test(Song $song)
+    {
+        return view('songs/test')->with(['songs' => $song]);
+    }
 }

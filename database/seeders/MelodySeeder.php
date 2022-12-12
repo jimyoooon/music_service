@@ -19,7 +19,10 @@ class MelodySeeder extends Seeder
     public function run()
     {
         DB::table('melodies')->insert([
-                'name'=> '今風な曲',
+                ['name'=> '今風な曲'],
+                ['name'=> 'エモい曲'],
+                ['name'=> '楽しい'],
+                ['name'=> 'シネマティック'],
         ]);
     }
 }

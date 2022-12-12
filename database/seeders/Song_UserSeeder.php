@@ -22,6 +22,8 @@ class Song_UserSeeder extends Seeder
         DB::table('song_user')->insert([
             'user_id'=> 1,
             'song_id'=> 1,
+
+            
         ]);
 
     }

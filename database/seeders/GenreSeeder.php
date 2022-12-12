@@ -19,7 +19,10 @@ class GenreSeeder extends Seeder
     public function run()
     {
         DB::table('genres')->insert([
-            'name'=> 'Jpop',
+        [   'name'=> 'Jpop'],
+        [   'name'=> 'Kpop'],
+        [   'name'=> 'Rock'],
+        [   'name'=> 'Rap'],
         ]);
 
     }
