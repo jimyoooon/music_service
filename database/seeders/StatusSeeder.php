@@ -19,7 +19,9 @@ class StatusSeeder extends Seeder
     public function run()
     {
         DB::table('statuses')->insert([
-            'name'=> '編集可',
+            ['name'=> '編集可'],
+            ['name'=> '編集不可'],
+            ['name'=> 'アドバイスください'],
         ]);
 
     }

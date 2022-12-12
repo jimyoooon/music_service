@@ -15,7 +15,7 @@
                         <P>曲の作成背景：{{ $song->background }}</P>
                         <p>曲の概要：{{ $song->overview }}</p>
                         <P>音声ファイル：{{ $song->audio}}</P>
-                        <img src="{{ asset($song->image) }}">
+                        <img src="{{$song->image}}">
                     </div>
                     <p class="edit">[<a href="/songs/{{ $song->id }}/edit">edit</a>]</p>
                     <div class="footer">

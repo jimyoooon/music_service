@@ -55,5 +55,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Message', 'messages', 'send_user_id');
     }
+    
+    public function songs()
+    {
+        return $this->belongsToMany(Song::class);
+    }
 
 }

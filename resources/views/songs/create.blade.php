@@ -30,9 +30,21 @@
                             <h2>audio</h2>
                             <textarea name="song[audio]" placeholder="音声ファイル">{{old("song.audio") }}</textarea>
                             <p class="audio__error" style="color:red">{{ $errors->first('song.audio') }}</p>
+                        <div class="melodies">
+                            <h2>好きな曲調</h2>
+                                @foreach($melodies as $melody)
+                        
+                                    <label>
+                                        {{-- valueを'$subjectのid'に、nameを'配列名[]'に --}}
+                                        <input type="checkbox" value="{{ $melody->id }}" name="melodies_array[]">
+                                            {{$melody->name}}
+                                        </input>
+                                    </label>
+                                    
+                                @endforeach         
                         </div>
                         <input type="file" name="image">
-                        <input type="submit" value="[store]"/>
+                        <input type="submit" value="アップロード">
                     </form>
                     <div class="footer">
                         <a href="/index">[戻る]</a>

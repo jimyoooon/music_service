@@ -13,12 +13,20 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('ホーム画面')}}
+                    </x-nav-link>
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
                         {{__('プロフィール') }}
                     </x-nav-link>
                     <x-nav-link :href='route("profile")' :active="request()->routeIs('profile')">
                         {{__('投稿画面') }}
-                    </x-nav-link>         
+                    </x-nav-link>     
+                    @if (auth()->user()->sns && auth()->user()->overview)
+                        <x-nav-link :href='route("select")' :active="request()->routeIs('select')">
+                            {{__('選択画面') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
             <!-- Settings Dropdown -->

@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
                 'name'=> 'ゆ',
-                'email'=> '84smt1',
+                'email'=> '84smt11ryn@ezweb.ne.jp',
                 'password'=> 'jiminyo0705.',
                 'age'=> '22',
                 'image'=> '"C:\Users\81805\Pictures\Screenshots\スクリーンショット (21).png"',
