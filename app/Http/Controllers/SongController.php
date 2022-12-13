@@ -8,6 +8,8 @@ use App\Models\Melody;
 use App\Models\User;
 use Storage;
 use Illuminate\Support\Facades\Auth;
+use Cloudinary; 
+use App\Models\Status;
 
 class SongController extends Controller
 {
@@ -23,34 +25,36 @@ class SongController extends Controller
         return view('songs/show')->with(['song' => $song]);
     }
 
-    public function create(Melody $melody, Song $song)
+    public function create(Melody $melody, Status $status, Song $song)
     {
         
-        return view('songs/create')->with(['melodies' => $melody->get()]);
+        return view('songs/create')->with(['melodies' => $melody->get()])->with(['statuses' => $status->get()]);
     }
     
     public function store(Request $request, Song $song)
     {
         $input_song = $request['song'];
-        $input_melodies = $request->melodies_array;  //subjects_arrayはnameで設定した配列名
-        
-        //先にstudentsテーブルにデータを保存
+        $input_melodies = $request->melodies_array; 
         $song->fill($input_song)->save();
-        
-        //attachメソッドを使って中間テーブルにデータを保存
         $song->melodies()->attach($input_melodies); 
         
+        $input_song = $request['song'];
+        $input_statuses = $request->statuses_array;
+        $song->fill($input_song)->save();
+        $song->statuses()->attach($input_statuses);
         
         
         $input = $request['song'];
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); 
+        $input += ['image' => $image_url];
+        $movie_url = Cloudinary::upload($request->file('movie')->getRealPath())->getSecurePath(); 
+        $input += ['movie' => $movie_url];
+        $audio_url = Cloudinary::upload($request->file('audio')->getRealPath())->getSecurePath(); 
+        $input += ['audio' => $audio_url];
 
-        $song = new Song;
-        $form = $request->all();
-        $image = $request->file('image');
-        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
-        $song->image = Storage::disk('s3')->url($path);
-        $song->fill($input)->save();
         
+        $song->fill($input)->save();
+
         return redirect('/songs/' . $song->id);
     }
     

@@ -18,6 +18,11 @@
                             <p>今の気分：{{ $user->feeling }}</p>
                             <p>概要：{{ $user->overview }}</p>
                             <p>SNS：{{ $user->sns }}</p>
+                            <h5 class='melody'>
+                                @foreach($user->melodies as $melody)   
+                                    メロディー：{{ $melody->name }}
+                                @endforeach
+                            </h5>
                     </div>
                     <p class="edit">[<a href="/users/{{ $user->id }}/edit">edit</a>]</p>
                 </div>

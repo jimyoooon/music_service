@@ -20,6 +20,7 @@ class Song extends Model
         'overview',
         'audio',
         'image',
+        'movie',
         
         ];
         
@@ -39,6 +40,10 @@ class Song extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+    public function statuses()
+    {
+        return $this->belongsToMany(Status::class);
     }
 
 }

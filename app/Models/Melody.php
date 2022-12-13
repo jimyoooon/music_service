@@ -13,4 +13,9 @@ class Melody extends Model
 
     return $this->belongsToMany(Song::class);
     }   
+    
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
