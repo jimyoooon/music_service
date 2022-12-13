@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasFactory;
+    
+    public function songs()
+    {
+        return $this->belongsToMany(Song::class);
+    }
+
 }

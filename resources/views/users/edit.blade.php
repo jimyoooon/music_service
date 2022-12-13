@@ -30,6 +30,19 @@
                                     <input type='text' name='user[overview]' value="{{ $user->overview }}">
                                     <h2>SNS</h2>
                                     <input type='text' name='user[sns]' value='{{ $user->sns }}'>
+                                    <div class="melodies">
+                                        <h2>聞きたい曲調</h2>
+                                            @foreach($melodies as $melody)
+                                    
+                                                <label>
+                                                    {{-- valueを'$subjectのid'に、nameを'配列名[]'に --}}
+                                                    <input type="checkbox" value="{{ $melody->id }}" name="melodies_array[]">
+                                                        {{$melody->name}}
+                                                    </input>
+                                                </label>
+                                                
+                                            @endforeach         
+                                    </div>
                                 </div>
                                 <input type="submit" value="[保存]">
                             </form>
