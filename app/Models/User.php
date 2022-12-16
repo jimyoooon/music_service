@@ -65,5 +65,19 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Melody::class);
     }
+    
+    public function comments()
+    {
+        return $this->belongsToMany(Comment::class);
+    }
+    
+    public function replies()
+    {
+        return $this->belongsToMany(Reply::class);
+    }
 
+    public function messages_second()
+    {
+        return $this->hasMany(Massage::class);
+    }
 }

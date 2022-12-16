@@ -27,12 +27,18 @@
                             <p class="overview__error" style="color:red">{{ $errors->first('song.overview') }}</p>
                         </div>
                         <div class="body">
-                            画像登録：<input type="file" name="image">
-                            動画登録：<input type='file' name='movie'>
-                            音声登録：<input type='file' name='audio'>      
+                            <div class='path'>
+                                画像登録：<input type="file" name="image">
+                            </div>
+                            <div class='movie'>
+                                動画登録：<input type='file' name='movie'>
+                            </div>
+                            <div class='audio'>
+                                音声登録：<input type='file' name='audio'>   
+                            </div>
                         </div>
                         <div class="melodies">
-                            <h2>曲調</h2>
+                            <h2>[曲調]</h2>
                                 @foreach($melodies as $melody)
                         
                                     <label>
@@ -45,7 +51,7 @@
                                 @endforeach         
                         </div>
                         <div class="status">
-                            <h2>ステータス</h2>
+                            <h2>[ステータス]</h2>
                                 @foreach($statuses as $status)
                                 
                                     <label>
@@ -55,7 +61,7 @@
                                     </label>
                                 @endforeach
                         </div>
-                        <input type="submit" value="アップロード">
+                        <input type="submit" value="<アップロード>">
                     </form>
                     <div class="footer">
                         <a href="/index">[戻る]</a>

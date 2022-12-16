@@ -1,0 +1,8 @@
+# メモリの上限
+php_value memory_limit 20M
+ 
+# 1度のアップロードファイル合計サイズ
+php_value post_max_size 20M
+ 
+# 1ファイルの最大サイズ
+php_value upload_max_filesize 20M

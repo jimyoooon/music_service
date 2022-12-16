@@ -10,14 +10,18 @@ use Storage;
 use Illuminate\Support\Facades\Auth;
 use Cloudinary; 
 use App\Models\Status;
+use App\Models\Comment;
+use App\Models\Message;
 
 class SongController extends Controller
 {
     public function index(Song $song, User $user)
     {
+        
         $auth = auth()->user()->id;
         $user = User::where('id', $auth)->first();
-        return view('songs/index')->with(['songs' => $song->getPaginateByLimit(10)])->with(['users' => $user]);
+        $song = $user->songs()->paginate(1);
+        return view('songs/index')->with(['songs' => $song]);
     }
     
     public function show(Song $song)
@@ -36,28 +40,45 @@ class SongController extends Controller
         $input_song = $request['song'];
         $input_melodies = $request->melodies_array; 
         $song->fill($input_song)->save();
-        $song->melodies()->attach($input_melodies); 
+        $song->melodies()->attach($input_melodies);  //中間テーブルmelodyタグリレーション
+        
         
         $input_song = $request['song'];
         $input_statuses = $request->statuses_array;
         $song->fill($input_song)->save();
-        $song->statuses()->attach($input_statuses);
+        $song->statuses()->attach($input_statuses); //中間テーブルstatusタグリレーション
         
+        $user = Auth::id();
+        $song->users()->attach($user);  //中間テーブルsong_userリレーション
         
+
+
         $input = $request['song'];
         $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); 
         $input += ['image' => $image_url];
         $movie_url = Cloudinary::upload($request->file('movie')->getRealPath())->getSecurePath(); 
         $input += ['movie' => $movie_url];
         $audio_url = Cloudinary::upload($request->file('audio')->getRealPath())->getSecurePath(); 
-        $input += ['audio' => $audio_url];
-
+        $input += ['audio' => $audio_url];  //画像,音声,動画登録
         
-        $song->fill($input)->save();
 
+        $song->fill($input)->save();
+        
         return redirect('/songs/' . $song->id);
     }
     
+    public function messages_store(Request $request, Message $message)
+    {
+        $user = Auth::id();
+        $song = $user->songs();
+        $send_user_id = 
+        $input_message = $request['message'];
+        dd($input_message);
+        $message->fill($input_message)->save(); //曲とメッセージを送るときの保存処理(曲に関してはもうすでに設定してあるのでメッセージのみ）
+        return view('songs/send' . $message->id);        
+    }
+    
+
     
     public function edit(Song $song)
     {
@@ -67,12 +88,6 @@ class SongController extends Controller
     public function update(Request $request, Song $song)
     {
         $input_song = $request['song'];
-        $song = new Song;
-        $form = $request->all();
-        $image = $request->file('image');
-        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
-        $song->image = Storage::disk('s3')->url($path);
-
         $song->fill($input_song)->save();
         return redirect('/songs/' . $song->id);
         
@@ -84,13 +99,19 @@ class SongController extends Controller
         return view('songs/select')->with(['users'=> $user]);
     }
     
-    public function home()
+    public function home(Message $message)
     {
-        return view('songs/home');
+        return view('songs/home')->with(['messages' => $message]);
     }
     
-    public function test(Song $song)
+    public function send(Song $song, User $user)
     {
-        return view('songs/test')->with(['songs' => $song]);
+        $auth = auth()->user()->id;
+        $user = User::where('id', $auth)->first();
+        $song = $user->songs();
+        return view('songs/send')->with(['songs' => $song->get()]);
     }
+    
+
+    
 }

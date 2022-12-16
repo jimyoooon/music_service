@@ -10,7 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class='body'>
-                        some artist song
+                        @foreach($messages as $message)
+                            <div class='content'>
+                                <h1>名前：{{ $message->song_id }}</h1>
+                            </div>
+                            <p>--------------------------------------</p>
+                        @endforeach
                     </div>                            
                 </div>
             </div>
