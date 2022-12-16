@@ -45,5 +45,15 @@ class Song extends Model
     {
         return $this->belongsToMany(Status::class);
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Song::class);
+    }
+    
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 
 }

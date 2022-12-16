@@ -12,14 +12,18 @@
                     <div class='body'>
                         @foreach($users as $user)
                             <div class='content'>
-                                <p>名前：{{ $user->name }}</p>
-                                <P>年齢：{{ $user->age }}</P>
+                                <h1>名前：{{ $user->name }}</h1>
+                            </div>
+                            <div class='body'>
+                                <h1>年齢：{{ $user->age }}</h1>
+                            </div>
                                 <p>写真：{{ $user->image }}</p>
                                 <P>どんな曲を聴きたい？：{{ $user->additional_question}}</P>
                                 <p>今の気分：{{ $user->feeling }}</p>
                                 <p>概要：{{ $user->overview }}</p>
                                 <p>SNS：{{ $user->sns }}</p>
-                                <a href='songs/test'>[このユーザーに送る]</a>
+                                <a href='songs/send'>[このユーザーに送る]</a>
+                                <p>--------------------------------------</p>
                             </div>
                         @endforeach
                     </div>                            

@@ -13,11 +13,13 @@
                     <div class='body'>
                         <a href='/songs/create'>[create]</a>
                         <div class='profile'>
-                            @foreach ($users->songs as $song)
+                            @foreach ($songs as $song)
                                 <a href="/songs/{{ $song->id }}">名前：{{ $song->name }}</a>
                                 <p class='background'>曲の作成背景：{{ $song->background }}</p>
                                 <p class='overview'>曲の概要：{{ $song->overview }}</p>
-                                音声：<img src="{{$song->audio}}">
+                                <div class='audio'>
+                                    音声：<img src="{{$song->audio}}">
+                                </div>
                                 画像：<img src="{{$song->image}}">
                                 動画：<img src="{{$song->movie}}">
                                 <h5 class='melody'>
@@ -30,13 +32,12 @@
                                         メロディー：{{ $status->name }}
                                     @endforeach
                                 </h5>
-                                @foreach($user as $u)
-                                {{$u->name}}
-                                @endforeach
-                            @endforeach
-                        </div>
+                                <p>-------------------------------</p>
                         <div class='paginate'>
                             {{ $songs->links() }}
+                        </div>
+
+                            @endforeach
                         </div>
                     </div>
                 </div>

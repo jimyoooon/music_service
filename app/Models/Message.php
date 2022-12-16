@@ -9,7 +9,16 @@ class Message extends Model
 {
     use HasFactory;
     
-    protected $fillable = 'send_user_id';
+    protected $fillable = ['send_user_id', 'body'];
     protected $table = 'messages';
-
+    
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function songs()
+    {
+        return $this->belongsTo(Song::class);
+    }
 }

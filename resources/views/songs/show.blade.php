@@ -25,7 +25,7 @@
                         </h5>
                         <h5 class='status'>
                                 @foreach($song->statuses as $status)   
-                                    メロディー：{{ $status->name }}
+                                    ステータス：{{ $status->name }}
                                 @endforeach
                         </h5>
                     </div>
