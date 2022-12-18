@@ -67,19 +67,6 @@ class SongController extends Controller
         return redirect('/songs/' . $song->id);
     }
     
-    public function messages_store(Request $request, Message $message)
-    {
-        $user = Auth::id();
-        $song = $user->songs();
-        $send_user_id = 
-        $input_message = $request['message'];
-        dd($input_message);
-        $message->fill($input_message)->save(); //曲とメッセージを送るときの保存処理(曲に関してはもうすでに設定してあるのでメッセージのみ）
-        return view('songs/send' . $message->id);        
-    }
-    
-
-    
     public function edit(Song $song)
     {
         return view('songs/edit')->with(['song' => $song]);
@@ -93,23 +80,11 @@ class SongController extends Controller
         
     }
     
-    public function select()
+    public function select(User $user)
     {   
-        $user=User::where('overview', null)->where('sns', null)->get();
-        return view('songs/select')->with(['users'=> $user]);
-    }
-    
-    public function home(Message $message)
-    {
-        return view('songs/home')->with(['messages' => $message]);
-    }
-    
-    public function send(Song $song, User $user)
-    {
-        $auth = auth()->user()->id;
-        $user = User::where('id', $auth)->first();
-        $song = $user->songs();
-        return view('songs/send')->with(['songs' => $song->get()]);
+        //$user=User::where('overview', null)->where('sns', null)->get();
+        $user = User::where("id" , "!=" , Auth::user()->id);
+        return view('songs/select')->with(['users'=> $user->get()]);
     }
     
 

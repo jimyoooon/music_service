@@ -51,7 +51,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\User', 'follows', 'follower_id', 'followed_id');
     }
     
-    public function messages()
+    public function message_store()
     {
         return $this->belongsToMany('App\Message', 'messages', 'send_user_id');
     }
@@ -76,7 +76,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Reply::class);
     }
 
-    public function messages_second()
+    public function messages()
     {
         return $this->hasMany(Massage::class);
     }

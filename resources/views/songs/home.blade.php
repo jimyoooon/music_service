@@ -12,7 +12,13 @@
                     <div class='body'>
                         @foreach($messages as $message)
                             <div class='content'>
-                                <h1>名前：{{ $message->song_id }}</h1>
+                                <h2>送られてきた曲</h2>
+                                <div class = "messages">
+                                    メッセージ: {{$message->body}}
+                                </div>
+                                <div class='movie'>
+                                    動画：<img src="{{$message->song->image}}"> <!--message モデルrelation -->
+                                </div>
                             </div>
                             <p>--------------------------------------</p>
                         @endforeach

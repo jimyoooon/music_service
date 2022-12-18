@@ -20,8 +20,13 @@
                                 <div class='audio'>
                                     音声：<img src="{{$song->audio}}">
                                 </div>
-                                画像：<img src="{{$song->image}}">
-                                動画：<img src="{{$song->movie}}">
+                                <div class='path'>
+                                    画像：<img src="{{$song->image}}">
+                                </div>
+                                <div class='movie'>
+                                    動画：<img src="{{$song->movie}}">
+                                </div>
+                                
                                 <h5 class='melody'>
                                     @foreach($song->melodies as $melody)   
                                         メロディー：{{ $melody->name }}
@@ -29,7 +34,7 @@
                                 </h5>
                                 <h5 class='status'>
                                     @foreach($song->statuses as $status)   
-                                        メロディー：{{ $status->name }}
+                                        ステータス：{{ $status->name }}
                                     @endforeach
                                 </h5>
                                 <p>-------------------------------</p>

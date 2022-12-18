@@ -13,6 +13,7 @@ class Comment extends Model
         'file',
         'body',
         'song_id',
+        'users',
     ];
     
     public function users()
@@ -28,5 +29,10 @@ class Comment extends Model
     public function song()
     {
         return $this->belongsTo(Song::class);
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

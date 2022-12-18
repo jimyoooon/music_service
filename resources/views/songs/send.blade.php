@@ -15,8 +15,9 @@
                             <form method='POST' action="/messages" enctype="multipart/form-data">
                                 @csrf
                                 @foreach($songs as $song)
-                                    <input type='radio' value="{{ $song->name}}" name="song">{{ $song->name }}
+                                    <input type='radio' value="{{ $song->id}}" name="message[song_id]">{{ $song->name }}</input>
                                 @endforeach
+                                <input type='hidden' value='{{auth()->user()->id}}' name='message[user_id]'>
                                 <div class="messages">
                                     <h2>メッセージ</h2>
                                     <input type="text" name="message[body]" placeholder="メッセージ入力" value="{{old("message.body") }}"/>

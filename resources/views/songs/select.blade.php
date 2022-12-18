@@ -10,22 +10,27 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class='body'>
-                        @foreach($users as $user)
-                            <div class='content'>
-                                <h1>名前：{{ $user->name }}</h1>
-                            </div>
-                            <div class='body'>
-                                <h1>年齢：{{ $user->age }}</h1>
-                            </div>
-                                <p>写真：{{ $user->image }}</p>
-                                <P>どんな曲を聴きたい？：{{ $user->additional_question}}</P>
-                                <p>今の気分：{{ $user->feeling }}</p>
-                                <p>概要：{{ $user->overview }}</p>
-                                <p>SNS：{{ $user->sns }}</p>
-                                <a href='songs/send'>[このユーザーに送る]</a>
-                                <p>--------------------------------------</p>
-                            </div>
-                        @endforeach
+                        <form method ='POST' action='/songs/send'>
+                        @csrf
+                            @foreach($users as $user)
+                                <div class='content'>
+                                    <h1>名前：{{ $user->name }}</h1>
+                                    <!--<input type='hidden' value='下記と同様' name='send_user_id'>このユーザーに送る</input> -->
+                                </div>
+                                <div class='body'>
+                                    <h1>年齢：{{ $user->age }}</h1>
+                                </div>
+                                    <p>写真：{{ $user->image }}</p>
+                                    <P>どんな曲を聴きたい？：{{ $user->additional_question}}</P>
+                                    <p>今の気分：{{ $user->feeling }}</p>
+                                    <p>概要：{{ $user->overview }}</p>
+                                    <p>SNS：{{ $user->sns }}</p>
+                                    <input type='submit' value='{{$user->id}}' name='send_user_id'>このユーザーに送る</input>
+                                    <!-- <button>このユーザーに送る</button> -->
+                                    <p>--------------------------------------</p>
+                                </div>
+                            @endforeach
+                        </form>
                     </div>                            
                 </div>
             </div>
