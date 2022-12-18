@@ -40,22 +40,18 @@
                         <div class="melodies">
                             <h2>[曲調]</h2>
                                 @foreach($melodies as $melody)
-                        
                                     <label>
-                                        {{-- valueを'$subjectのid'に、nameを'配列名[]'に --}}
-                                        <input type="checkbox" value="{{ $melody->id }}" name="melodies_array[]">
+                                        <input type="radio" value="{{ $melody->id }}" name="melodies_array[]">
                                             {{$melody->name}}
                                         </input>
                                     </label>
-                                    
                                 @endforeach         
                         </div>
                         <div class="status">
                             <h2>[ステータス]</h2>
                                 @foreach($statuses as $status)
-                                
                                     <label>
-                                        <input type="checkbox" value='{{ $status->id}}' name="statuses_array[]">
+                                        <input type="radio" value='{{ $status->id}}' name="statuses_array[]">
                                             {{$status->name}}
                                         </input>
                                     </label>

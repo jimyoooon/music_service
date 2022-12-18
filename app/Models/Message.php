@@ -9,7 +9,11 @@ class Message extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['send_user_id', 'body'];
+    protected $fillable = [ 'send_user_id',
+                            'body',
+                            'user_id',
+                            'song_id'];
+                            
     protected $table = 'messages';
     
     public function users()
@@ -17,8 +21,9 @@ class Message extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function songs()
+    public function song()
     {
         return $this->belongsTo(Song::class);
     }
+    
 }
