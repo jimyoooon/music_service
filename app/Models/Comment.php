@@ -13,7 +13,7 @@ class Comment extends Model
         'file',
         'body',
         'song_id',
-        'users',
+        'user_id',
     ];
     
     public function users()

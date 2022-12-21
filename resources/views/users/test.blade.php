@@ -5,21 +5,43 @@
             {{ __('プロフィール') }}
         </h2>
     </x-slot>
-    
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class='body'>
-                        @foreach ($users as $user)
-                        <a href="/users/{{ $user->id }}">名前：{{ Auth::user()->name }} さん、こんにちは。</a>
-                        @endforeach
-                    </div>
-                    <div class="footer">
-                        <a href="/index">戻る</a>
-                    </div>
-                </div>
-            </div>
+      <form action="/posts" method="GET">
+        <input type="search" placeholder="キーワード検索" name="search" value="@if (isset($search)) {{ $search }} @endif">
+        <div>
+          <button type="submit">検索</button>
+          <button>
+            <a href="/posts">
+              クリア
+            </a>
+          </button>
         </div>
-    </div>
+      </form>
+      <div class="posts">
+        <a href="/post/create">[create]</a>
+        @foreach($posts as $post)
+          <div class="post">
+            <h1><a href="/post/{{ $post->id }}">{{ $post->title }}</a></h1>
+            <p>{{ $post->body }}</p>
+            <p>{{ $post->user->name }}</p>
+            <p>{{ $post->updated_at }}</p>
+            <form action='/post/{{ $post->id }}' method='post' style='display:inline' id="form_delete">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="delete" onclick="return deletePost(this);">
+            </form>
+          </div><!-- /.post -->
+        @endforeach
+        <div class="paginate">
+          {{ $posts->links() }}
+        </div>
+      </div><!-- /.posts -->
+
+      <script>
+      function deletePost(e){
+          'use strict';
+          if(confirm('削除すると復元できません。\n本当に削除しますか？')){
+              document.getElementById('form_delete').submit();
+          }
+      }
+      </script>
 </x-app-layput>
