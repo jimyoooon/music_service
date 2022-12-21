@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Cloudinary; 
 use App\Models\Comment;
+use App\Models\Reply;
 use App\Models\Message;
 
 
@@ -35,15 +36,12 @@ class SendController extends Controller
         return redirect('/index');        
     }
     
-    public function home(Message $message)
+    public function home(Message $message, Comment $comment, Song $song, User $user)  //Comment, Song = comment関連
     {
-        //if(auth()->user()->id == message()->send_user_id){
-            //return view('songs/home')->with(['messages' => $message->get()]);}
-        //$message = Message::find(2);
-        //$message = Message::find(2);
         $message = Message::where('send_user_id', auth()->user()->id);
-        //dd($message);
-        return view('songs/home')->with(['messages' => $message->get()]);
+        $comment = Comment::where('song_id', '=', $message->song_id);
+        //$comment = Comment::where('song_id', '=', $song->id)->where('user_id', '=', $user->id);
+        return view('songs/home')->with(['messages' => $message->get(), 'songs' => $song->get(), 'comments' => $comment->get()]); //コメント機能実装前
     }
     
 

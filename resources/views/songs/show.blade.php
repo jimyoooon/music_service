@@ -14,10 +14,19 @@
                         <p>名前：{{ $song->name }}</p>
                         <P>曲の作成背景：{{ $song->background }}</P>
                         <p>曲の概要：{{ $song->overview }}</p>
-                        
-                        音声：<img src="{{$song->audio}}">
-                        画像：<img src="{{$song->image}}">
-                        動画：<img src="{{$song->movie}}">
+                        <div class='image'>
+                            画像：<img src="{{$song->image}}" width='300' height='200'>
+                        </div>
+                        <div class='movie'>
+                            <video controls preload='auto'>
+                                動画：<source src="{{$song->movie}}" width='300' height='200' type="video/mp4">
+                            </video>
+                        </div>
+                        <div class='audio'>
+                            <video controls preload="auto">
+                                音声：<source src="{{$song->audio}}" width='300' height='200'>
+                            </video>
+                        </div>
                         <h5 class='melody'>
                             @foreach($song->melodies as $melody)   
                                 メロディー：{{ $melody->name }}

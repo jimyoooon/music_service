@@ -7,13 +7,13 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SendController;
 
 Route::post('/songs/send', [SendController::class, 'send']);
+Route::post('/songs/{song}/comment', [CommentController::class, 'store']);  //comment保存url
 
 Route::get('/users/show', [UserController::class, 'show'])->name('index');
 Route::post('/users',  [UserController::class, 'store']);
 Route::get('/users/{user}', [UserController::class, 'show']);
 Route::get('/users/{user}/edit', [UserController::class, 'edit']);
 Route::put('/users/{user}', [UserController::class, 'update']);
-
 
 Route::get('/index', [SongController::class, 'index'])->name('profile');
 Route::get('/select', [SongController::class, 'select'])->name('select');

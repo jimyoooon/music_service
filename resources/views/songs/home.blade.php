@@ -17,8 +17,29 @@
                                     メッセージ: {{$message->body}}
                                 </div>
                                 <div class='movie'>
-                                    動画：<img src="{{$message->song->image}}"> <!--message モデルrelation -->
+                                    動画：<img src="{{$message->song->image}}" width='300' height='200'> <!--message モデルrelation -->
                                 </div>
+
+                                    <div class="comment-post">        <!-- コメント欄実装 -->
+                                        <h3>コメント投稿</h3>          
+                                        <form action="/songs/{{ $message->song->id }}/comment" method="POST">
+                                            @csrf
+                                            <input type='text' name='body'>
+                                            <button type='submit'>add</button>
+                                        </form>
+                                    </div>               
+                                @if($comments)                                  
+                                    <div class="comments">
+                                        @foreach($comment as $comment)
+                                            <div class="comment">
+                                                <h4>{{ $comment->body }}</h4>
+                                                <h4>{{ $comment->file }}</h4>
+                                                <p>{{ $comment->user->name }}</p>
+                                                <p>{{ $comment->updated_at }}</p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif                                 <!-- コメント欄機能ここまで-->
                             </div>
                             <p>--------------------------------------</p>
                         @endforeach

@@ -11,22 +11,31 @@ use Illuminate\Support\Facades\Auth;
 use Cloudinary; 
 use App\Models\Status;
 use App\Models\Comment;
+use App\Models\Reply;
 use App\Models\Message;
 
 class SongController extends Controller
 {
-    public function index(Song $song, User $user)
+    public function index(Comment $comment, Song $song, User $user)
     {
         
         $auth = auth()->user()->id;
         $user = User::where('id', $auth)->first();
         $song = $user->songs()->paginate(1);
-        return view('songs/index')->with(['songs' => $song]);
+        $comment = Comment::where('song_id', '=', $song->id)->get();
+        dd($comment);
+        
+        return view('songs/index')->with(['songs' => $song, 'comments' => $comment->get()]);
+        
+        //$comment = Comment::where('song_id', '=', $song->id); //コメント機能
+        //return view('songs/index')->with(['songs' => $song->get()])->with(['comments' => $comment->get()]); //コメント機能
+        
     }
     
-    public function show(Song $song)
+    public function show(Song $song, Comment $comment)
     {
-        return view('songs/show')->with(['song' => $song]);
+        //$comment = Comment::where('song_id', '=', $song->id);
+        return view('songs/show')->with(['song' => $song])->with(['comments' => $comment]);
     }
 
     public function create(Melody $melody, Status $status, Song $song)
@@ -55,13 +64,12 @@ class SongController extends Controller
 
         $input = $request['song'];
         $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); 
-        $input += ['image' => $image_url];
         $movie_url = Cloudinary::upload($request->file('movie')->getRealPath())->getSecurePath(); 
-        $input += ['movie' => $movie_url];
         $audio_url = Cloudinary::upload($request->file('audio')->getRealPath())->getSecurePath(); 
-        $input += ['audio' => $audio_url];  //画像,音声,動画登録
+        $input += ['image' => $image_url];
+        $input += ['movie' => $movie_url];
+        $input += ['audio' => $audio_url];                                       //画像,音声,動画登録
         
-
         $song->fill($input)->save();
         
         return redirect('/songs/' . $song->id);
