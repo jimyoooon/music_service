@@ -12,37 +12,29 @@
                     <div class='body'>
                         <h1 class="title">編集画面</h1>
                         <div class="content">
-                            <form action="/users/{{ $user->id }}" method="POST">
+                            <form action="/users/{{ $user->id }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class='content__body'>
                                     <h2>名前</h2>
                                     <input type='text' name='user[name]' value="{{ $user->name }}">
+                                    <p class="name__error" style="color:red">{{ $errors->first('user.name') }}</p>
                                     <h2>年齢</h2>
                                     <input type='text' name='user[age]' value="{{ $user->age }}">
-                                    <h2>写真</h2>
-                                    <input type='text' name='user[image]' value='{{ $user->image }}'>
+                                    <p class="age__error" style="color:red">{{ $errors->first('user.age') }}</p>
+                                    <div class='image'>
+                                        画像登録：<input type="file" name="image">
+                                    </div>
                                     <h2>どんな曲が聞きたい？</h2>
                                     <input type='text' name='user[additional_question]' value="{{ $user->additional_question }}">
+                                    <p class="additional_question__error" style="color:red">{{ $errors->first('user.additional_question') }}</p>
                                     <h2>今の気分</h2>
                                     <input type='text' name='user[feeling]' value='{{ $user->feeling }}'>
+                                    <p class="feeling__error" style="color:red">{{ $errors->first('user.feeling') }}</p>
                                     <h2>概要</h2>
                                     <input type='text' name='user[overview]' value="{{ $user->overview }}">
                                     <h2>SNS</h2>
                                     <input type='text' name='user[sns]' value='{{ $user->sns }}'>
-                                    <div class="melodies">
-                                        <h2>聞きたい曲調</h2>
-                                            @foreach($melodies as $melody)
-                                    
-                                                <label>
-                                                    {{-- valueを'$subjectのid'に、nameを'配列名[]'に --}}
-                                                    <input type="checkbox" value="{{ $melody->id }}" name="melodies_array[]">
-                                                        {{$melody->name}}
-                                                    </input>
-                                                </label>
-                                                
-                                            @endforeach         
-                                    </div>
                                 </div>
                                 <input type="submit" value="[保存]">
                             </form>

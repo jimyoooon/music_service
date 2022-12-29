@@ -22,10 +22,38 @@
                                     <input type='text' name='song[background]' value="{{ $song->background }}">
                                     <h2>曲の概要</h2>
                                     <input type='text' name='song[overview]' value='{{ $song->overview }}'>
-                                    <h2>音声ファイル</h2>
-                                    <input type='text' name='song[audio]' value="{{ $song->audio }}">
-                                    <h2>画像登録</h2>
-                                    <input type="file" class="form-control-file" name='image' id="image" value='{{ $song->image}}'>
+                                    <div class="body">
+                                        <div class='image'>
+                                            画像登録：<input type="file" name="image" value='{{ $song->image }}'>
+                                        </div>
+                                        <div class='movie'>
+                                            動画登録：<input type='file' name='movie' value='{{ $song->movie }}'>
+                                        </div>
+                                        <div class='audio'>
+                                            音声登録：<input type='file' name='audio' value='{{ $song->audio }}'>   
+                                        </div>
+                                    </div>
+                                    <div class="melodies">
+                                        <h2>[曲調]</h2>
+                                            @foreach($melodies as $melody)
+                                                <label>
+                                                    <input type="radio" value="{{ $melody->id }}" name="melodies_array[]">
+                                                        {{$melody->name}}
+                                                    </input>
+                                                </label>
+                                            @endforeach         
+                                    </div>
+                                    <div class="status">
+                                        <h2>[ステータス]</h2>
+                                            @foreach($statuses as $status)
+                                                <label>
+                                                    <input type="radio" value='{{ $status->id}}' name="statuses_array[]">
+                                                        {{$status->name}}
+                                                    </input>
+                                                </label>
+                                            @endforeach
+                                    </div>
+                                    
                                 </div>
                                 <input type="submit" value="[保存]">
                             </form>

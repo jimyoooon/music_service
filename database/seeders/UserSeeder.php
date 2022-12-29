@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
                 'name'=> 'ゆ',
                 'email'=> '84smt11ryn@ezweb.ne.jp',
                 'password'=> 'jiminyo0705.',
-                'age'=> '22',
+                'age'=> 22,
                 'image'=> '"C:\Users\81805\Pictures\Screenshots\スクリーンショット (21).png"',
                 'feeling'=> 'いまはとてもいい気分です。',
                 'additional_question'=> '今風のドライブで聞くいい感じの曲が聞きたいです。',

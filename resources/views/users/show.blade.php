@@ -13,16 +13,13 @@
                     <div class='body'>
                             <p>名前：{{ $user->name }}</p>
                             <P>年齢：{{ $user->age }}</P>
-                            <p>写真：{{ $user->image }}</p>
+                            <div class-'image'>
+                               画像：<img src="{{$user->image}}" width='300' height='200'>
+                            </div>
                             <P>どんな曲を聴きたい？：{{ $user->additional_question}}</P>
                             <p>今の気分：{{ $user->feeling }}</p>
                             <p>概要：{{ $user->overview }}</p>
                             <p>SNS：{{ $user->sns }}</p>
-                            <h5 class='melody'>
-                                @foreach($user->melodies as $melody)   
-                                    メロディー：{{ $melody->name }}
-                                @endforeach
-                            </h5>
                     </div>
                     <p class="edit">[<a href="/users/{{ $user->id }}/edit">edit</a>]</p>
                 </div>

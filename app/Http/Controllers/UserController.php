@@ -6,40 +6,39 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Melody;
+use App\Http\Requests\UserRequest;
+use Cloudinary; 
+
 
 class UserController extends Controller
 {
 
-    public function show(User $user, Melody $melody)
+    public function show(User $user)
     {
         $user = Auth::user();
-        return view('users/show')->with(['user' => $user])->with(['melody' => $melody]);
+        return view('users/show')->with(['user' => $user]);
     }
     
     
-    public function edit(User $user, Melody $melody)
+    public function edit(User $user)
     {
-        return view('users/edit')->with(['user' => $user])->with(['melodies' => $melody->get()]);
+        return view('users/edit')->with(['user' => $user]);
     }
 
     public function store(Request $request, User $user)
     {
         $input = $request['user'];
         $user->fill($input)->save();
-                
-        $input_user = $request['user'];
-        $input_melodies = $request->melodies_array; 
-        $user->fill($input_user)->save();
-        $user->melodies()->attach($input_melodies); 
-
         return redirect('/users/' . $user->id);
 
     }
     
     public function update(Request $request, User $user)
     {
-        $input_user = $request['user'];
-        $user->fill($input_user)->save();
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $input = $request['user'];
+        $input += ['image' => $image_url];
+        $user->fill($input)->save();
         return redirect('/users/' . $user->id);
     }
 

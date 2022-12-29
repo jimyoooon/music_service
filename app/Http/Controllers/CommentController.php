@@ -10,24 +10,25 @@ use App\Models\User;
 use App\Models\Reply;
 use App\Models\Message;
 use Cloudinary; 
-
+use Storage;
+use App\Http\Requests\CommentRequest;
 
 
 class CommentController extends Controller
 {
     public function store(Request $request, Comment $comment, Song $song)
     {
-        //$input = $request['comment'];
-        //$comment->fill($input)->save();
-        //return redirect("/songs/index".$song->id); //リダイレクト先はhomeとindex
         $comment = new Comment();
         $comment->song_id = $song->id;
         $comment->body = $request->body;
-        $comment->file = $request->file;
         $comment->user_id = Auth::user()->id;
+        
+        $audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video'])->getSecurePath();
+        $comment->audio = $audio_url;
         $song->comments()->save($comment);
-        //return redirect('/index')->with(['song' => $song, 'comments' => $comment->get()]);
-        return redirect('/index')->with(['songs' => $song, 'comments' => $comment->where('song_id', '=', $song->id)->get()]);
+
+        return redirect('/index')->with(['song' => $song, 'comments' => $comment->get()]);
+
     }
 
 
@@ -42,4 +43,21 @@ class CommentController extends Controller
         //return view('songs/show');
     //}
 
+    public function store_second(Request $request, Song $song, Message $message)
+    {
+        
+        $comment = new Comment();
+        $comment->song_id = $song->id;
+        $comment->body = $request->body;
+        //$comment->audio = $request->audio;
+        $comment->user_id = Auth::user()->id;
+        //dd($request);
+        //dd($request->body);
+        $audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video'])->getSecurePath();
+        $comment->audio = $audio_url;
+        $song->comments()->save($comment);
+
+
+        return redirect('/home')->with(['messages' => $message, 'comments' => $comment->get()]);
+    }
 }

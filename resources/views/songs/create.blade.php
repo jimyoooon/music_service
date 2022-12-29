@@ -27,14 +27,17 @@
                             <p class="overview__error" style="color:red">{{ $errors->first('song.overview') }}</p>
                         </div>
                         <div class="body">
-                            <div class='path'>
-                                画像登録：<input type="file" name="image">
+                            <div class='image'>
+                                画像登録：<input type="file" name="image" value='{{ old("image")}}'>
+                                 <p class="image__error" style="color:red">{{ $errors->first('image') }}</p>
                             </div>
                             <div class='movie'>
-                                動画登録：<input type='file' name='movie'>
+                                動画登録：<input type='file' name='movie' value='{{ old("movie")}}'>
+                                 <p class="movie__error" style="color:red">{{ $errors->first('movie') }}</p>
                             </div>
                             <div class='audio'>
-                                音声登録：<input type='file' name='audio'>   
+                                音声登録：<input type='file' name='audio' value='{{ old("audio")}}'> 
+                                 <p class="audio__error" style="color:red">{{ $errors->first('audio') }}</p>
                             </div>
                         </div>
                         <div class="melodies">
