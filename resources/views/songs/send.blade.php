@@ -16,11 +16,13 @@
                                 @csrf
                                 @foreach($songs as $song)
                                     <input type='radio' value="{{ $song->id}}" name="message[song_id]">{{ $song->name }}</input>
+                                    <p class="body__error" style="color:red">{{ $errors->error->first('message.song_id') }}</p>
                                 @endforeach
-                                <input type='hidden' value='{{auth()->user()->id}}' name='message[user_id]'>
+                                <input type='hidden' value='{{auth()->user()->id}}' name='message[user]'>
                                 <div class="messages">
                                     <h2>メッセージ</h2>
-                                    <input type="text" name="message[body]" placeholder="メッセージ入力" value="{{old("message.body") }}"/>
+                                    <input type="text" name="message[body]" placeholder="メッセージ入力" value="{{old('message.body') }}"/>
+                                    <p class="body__error" style="color:red">{{ $errors->error->first('message.body') }}</p>
                                 </div>
                                 <input type="submit" value="<この曲を送る>">
                             </form>

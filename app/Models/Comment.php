@@ -10,10 +10,11 @@ class Comment extends Model
     use HasFactory;
     
         protected $fillable = [
-        'file',
         'body',
+        'audio',
         'song_id',
         'user_id',
+        'audio_url',
     ];
     
     public function users()

@@ -19,7 +19,7 @@
                         </div>
                         <div class='movie'>
                             <video controls preload='auto'>
-                                動画：<source src="{{$song->movie}}" width='300' height='200' type="video/mp4">
+                                動画：<source src="{{$song->movie}}" width='300' height='200'>
                             </video>
                         </div>
                         <div class='audio'>

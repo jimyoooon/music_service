@@ -7,7 +7,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SendController;
 
 Route::post('/songs/send', [SendController::class, 'send']);
-Route::post('/songs/{song}/comment', [CommentController::class, 'store']);  //comment保存url
+Route::post('/songs/{song}/comment', [CommentController::class, 'store']);//comment保存url
+Route::post('/songs/{song}/comment/second', [CommentController::class, 'store_second']);
 
 Route::get('/users/show', [UserController::class, 'show'])->name('index');
 Route::post('/users',  [UserController::class, 'store']);

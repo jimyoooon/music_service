@@ -20,7 +20,7 @@
                                 <div class='body'>
                                     <h1>年齢：{{ $user->age }}</h1>
                                 </div>
-                                    <p>写真：{{ $user->image }}</p>
+                                    <p>写真：<img src="{{$user->image}}" width='300' height='200'></p>
                                     <P>どんな曲を聴きたい？：{{ $user->additional_question}}</P>
                                     <p>今の気分：{{ $user->feeling }}</p>
                                     <p>概要：{{ $user->overview }}</p>
