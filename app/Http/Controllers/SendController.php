@@ -28,7 +28,7 @@ class SendController extends Controller
         return view('songs/send')->with(['songs' => $song->get()]);
     }
     
-    public function store(Request $request, Message $message) //もし一日同じuserが10件message(相手に曲を送る動作)を保存していたらif文でelseの方へ生かして何かしらのメッセージ表示
+    public function store(Request $request, Message $message) 
     {
         //$test = $request->session()->get('send_user_id');
         //$user = Auth::id();                     //user_id取得

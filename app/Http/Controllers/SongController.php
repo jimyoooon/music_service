@@ -75,7 +75,7 @@ class SongController extends Controller
         return view('songs/edit')->with(['song' => $song])->with(['melodies' => $melody->get()])->with(['statuses' => $status->get()]);
     }
     
-    public function update(Request $request, Song $song, Melody $melody, Status $status)
+    public function update(SongRequest $request, Song $song, Melody $melody, Status $status)
     {
         $input_song = $request['song'];
         $input_melodies = $request->melodies_array; 
