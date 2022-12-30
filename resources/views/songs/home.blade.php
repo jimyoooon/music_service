@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-blue-50 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-blue-800 border-b border-gray-200">
+                <div class="p-6 bg-blue-200 border-b border-gray-200">
                     <div class='body'>
                         @foreach($messages as $message)
                             <div class='content'>
