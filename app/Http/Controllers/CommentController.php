@@ -21,6 +21,7 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->song_id = $song->id;
         $comment->body = $request->body;
+        $comment->audio = $request->audio;
         $comment->user_id = Auth::user()->id;
         
         $audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video'])->getSecurePath();
