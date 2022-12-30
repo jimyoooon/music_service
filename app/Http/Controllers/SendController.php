@@ -41,7 +41,7 @@ class SendController extends Controller
         
         $now_date = date('Y-m-d');
         //dd($now_date);
-        $user_count = Message::where('user_id', auth()->user()->id)->whereDate('created_at', 'like', $now_date.'%')->count();
+        $user_count = Message::where('user_id', auth()->user()->id)->where('created_at', 'like', $now_date.'%')->count();
         //dd($user_count);
         if($user_count <= 9){
         $validated = $request->validateWithBag('error', [
