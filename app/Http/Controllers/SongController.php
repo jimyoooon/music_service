@@ -23,7 +23,7 @@ class SongController extends Controller
         
         $auth = auth()->user()->id;
         $user = User::where('id', $auth)->first();  //usersテーブルの中でidとログインユーザーのidが一致しているモノの一番初めのユーザーを取ってくる＝一人しかいない
-        $song = $user->songs()->latest()->paginate(1);
+        $song = $user->songs()->latest()->paginate(5);
         return view('songs/index')->with(['songs' => $song, 'comments' => $comment->get()->sortByDesc('created_at')]);
 
     }
@@ -58,13 +58,17 @@ class SongController extends Controller
 
 
         $input = $request['song'];
-        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); 
+        //if($request->hasFile('image')){
+            //$image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); 
+            //$input += ['image' => $image_url];
+        //}
+        //if($request->hasFile('audio')){
+            //$audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video',])->getSecurePath(); 
+            //$input += ['audio' => $audio_url];   
+        //}
         $movie_url = Cloudinary::upload($request->file('movie')->getRealPath(), ['resource_type' => 'video',])->getSecurePath(); 
-        $audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video',])->getSecurePath(); 
-        $input += ['image' => $image_url];
         $input += ['movie' => $movie_url];
-        $input += ['audio' => $audio_url];                                       //画像,音声,動画登録
-        
+
         $song->fill($input)->save();
         
         return redirect('/songs/' . $song->id);
@@ -75,7 +79,7 @@ class SongController extends Controller
         return view('songs/edit')->with(['song' => $song])->with(['melodies' => $melody->get()])->with(['statuses' => $status->get()]);
     }
     
-    public function update(SongRequest $request, Song $song, Melody $melody, Status $status)
+    public function update(Request $request, Song $song, Melody $melody, Status $status)
     {
         $input_song = $request['song'];
         $input_melodies = $request->melodies_array; 
@@ -91,13 +95,14 @@ class SongController extends Controller
         //$user = Auth::id();
         //$song->users()->attach($user);  //中間テーブルsong_userリレーション
         $input = $request['song'];
-        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); 
-        $movie_url = Cloudinary::upload($request->file('movie')->getRealPath(), ['resource_type' => 'video',])->getSecurePath(); 
-        $audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video',])->getSecurePath(); 
-        $input += ['image' => $image_url];
-        $input += ['movie' => $movie_url];
-        $input += ['audio' => $audio_url];                                       //画像,音声,動画登録
-        
+        //if($request->hasFile('image')){
+            //$image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); 
+            //$input += ['image' => $image_url];
+        //}
+        if($request->hasFile('movie')){
+            $movie_url = Cloudinary::upload($request->file('movie')->getRealPath(), ['resource_type' => 'video',])->getSecurePath(); 
+            $input += ['movie' => $movie_url];
+        }
         $song->fill($input)->save();
         
         return redirect('/songs/' . $song->id);

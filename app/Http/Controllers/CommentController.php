@@ -23,8 +23,10 @@ class CommentController extends Controller
         $comment->body = $request->body;
         $comment->user_id = Auth::user()->id;
         
-        $audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video'])->getSecurePath();
-        $comment->audio = $audio_url;
+        if($request->hasFile('audio')){
+            $audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video'])->getSecurePath();
+            $comment->audio = $audio_url;
+        }
         $song->comments()->save($comment);
 
         return redirect('/index')->with(['song' => $song, 'comments' => $comment->get()]);
@@ -53,8 +55,10 @@ class CommentController extends Controller
         $comment->user_id = Auth::user()->id;
         //dd($request);
         //dd($request->body);
-        $audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video'])->getSecurePath();
-        $comment->audio = $audio_url;
+        if($request->hasFile('audio')){
+            $audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video'])->getSecurePath();
+            $comment->audio = $audio_url;
+        }
         $song->comments()->save($comment);
 
 
