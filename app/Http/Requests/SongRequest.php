@@ -27,10 +27,8 @@ class SongRequest extends FormRequest
             'song.name' => 'required|string|max:100',
             'song.background' => 'required|string|max:1000',
             'song.overview' => 'required|string|max:1000',
-            'image' => 'required',
             'movie' => 'required',
-            'audio' => 'required',
-            
+
             //
         ];
     }

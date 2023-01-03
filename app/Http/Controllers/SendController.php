@@ -70,7 +70,7 @@ class SendController extends Controller
     {
         $message = Message::where('send_user_id', auth()->user()->id);
         //$comment = Comment::where('song_id', $message->song_id);  //Messagesテーブルからsend_user_idに送られてきた曲のidに
-        return view('songs/home')->with(['messages' => $message->get()->sortByDesc('created_at'), 'songs' => $song->get(), 'comments' => $comment->get()->sortByDesc('created_at')]); //コメント機能実装前
+        return view('songs/home')->with(['messages' => $message->get()->sortByDesc('created_at'), 'songs' => $song->get(), 'comments' => $comment->get()->sortByDesc('created_at'), 'users' => $user->get()]); //コメント機能実装前
     }
 
 

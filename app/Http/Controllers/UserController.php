@@ -35,9 +35,11 @@ class UserController extends Controller
     
     public function update(Request $request, User $user)
     {
-        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
         $input = $request['user'];
+        if($request->hasFile('image')){
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
         $input += ['image' => $image_url];
+        }
         $user->fill($input)->save();
         return redirect('/users/' . $user->id);
     }

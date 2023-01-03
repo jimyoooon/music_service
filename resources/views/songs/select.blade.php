@@ -13,19 +13,40 @@
                         <form method ='POST' action='/songs/send'>
                         @csrf
                             @foreach($users as $user)
-                                <div class='content'>
-                                    <h1>名前：{{ $user->name }}</h1>
-                                    <!--<input type='hidden' value='下記と同様' name='send_user_id'>このユーザーに送る</input> -->
-                                </div>
                                 <div class='body'>
-                                    <h1>年齢：{{ $user->age }}</h1>
-                                </div>
-                                    <p>写真：<img src="{{$user->image}}" width='300' height='200'></p>
-                                    <P>どんな曲を聴きたい？：{{ $user->additional_question}}</P>
-                                    <p>今の気分：{{ $user->feeling }}</p>
-                                    <p>概要：{{ $user->overview }}</p>
-                                    <p>SNS：{{ $user->sns }}</p>
-                                    <input type='submit' value='{{$user->id}}' name='send_user_id'>このユーザーに送る</input>
+                                    <div class='grid md:grid-cols-2 gap-8 lg:gap-12'>
+                                        <div class='space-y-12'>
+                                            <h2><p class='font-extrabold'>名前:</p>{{ $user->name }}</h2>
+                                            <h2><p class='font-extrabold'>年齢:</p>{{ $user->age }}</h2>
+                                        </div>
+                                    @if($user->image)
+                                        <div class-'image'>
+                                            <div class='font-extrabold'>画像：</div>
+                                            <img src="{{$user->image}}" width='300' height='200'>
+                                        </div>
+                                    @endif
+                                    </div>
+                                    <div class='gap-4 space-y-4'>
+                                        <p class='font-extrabold'>どんな曲を聴きたい？</p>
+                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                            <p>{{ $user->additional_question}}</p>
+                                        </div>
+                                        <p class='font-extrabold'>今の気分</p>
+                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                            <p>{{ $user->feeling }}</p>
+                                        </div>
+                                    @if($user->overview && $user->sns)
+                                        <p class='font-extrabold'>概要</p>
+                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                            <p>{{ $user->overview }}</p>
+                                        </div>
+                                        <p class='font-extrabold'>SNS</p>
+                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                            <p>{{ $user->sns }}</p>
+                                        </div>
+                                    @endif
+                                    </div>
+                                    <button type='submit' value='{{$user->id}}' name='send_user_id' class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-2 py-2 text-base font-medium text-white">このユーザーに送る</button>
                                     <!-- <button>このユーザーに送る</button> -->
                                     <p>--------------------------------------</p>
                                 </div>
