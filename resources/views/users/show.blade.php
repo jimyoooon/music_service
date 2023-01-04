@@ -11,34 +11,43 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class='body'>
-                        <div class='grid md:grid-cols-2 gap-8 lg:gap-12'>
-                            <div class='space-y-12'>
-                                <h2><p class='font-extrabold'>名前：</p>{{ $user->name }}</h2>
-                                <h2><p class='font-extrabold'>年齢：</p>{{ $user->age }}</h2>
+                        <div class='space-y-4'>
+                            <div class='movie grid md:grid-cols-2 gap-8 lg:gap-12' style="border: solid 3px #333; ">
+                                <div>
+                                    <h1 class='text-red-500'>注意事項</h1>
+                                    <p>・プロフィールを入力しないと曲がレコメンドされません</p>
+                                    <p>・概要・SNS欄にはアーティスト登録する方のみ記入してください</p>
+                                </div>
                             </div>
-                        @if($user->image)
-                            <div class-'image'>
-                                <p class='font-extrabold'>画像：</p>
-                                <img src="{{$user->image}}" width='300' height='200'>
+                            <div class='grid md:grid-cols-2 gap-8 lg:gap-12'>
+                                <div class='space-y-12'>
+                                    <h2><p class='font-extrabold'>名前：</p>{{ $user->name }}</h2>
+                                    <h2><p class='font-extrabold'>年齢：</p>{{ $user->age }}</h2>
+                                </div>
+                            @if($user->image)
+                                <div class-'image'>
+                                    <p class='font-extrabold'>画像：</p>
+                                    <img src="{{$user->image}}" width='300' height='200'>
+                                </div>
+                            @endif
                             </div>
-                        @endif
                         </div>
                         <div class='gap-4 space-y-2'>
                             <h2 class='font-extrabold'>どんな曲を聞きたい？</h2>
-                            <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                            <div class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                 <p>{{ $user->additional_question}}</p>
                             </div>
                             <h2 class='font-extrabold'>今の気分</h2>
-                            <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                            <div class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                 <p>{{ $user->feeling }}</p>
                             </div>
                         @if($user->overview && $user->sns)
                             <h2 class='font-extrabold'>アーティスト概要</h2>
-                            <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                            <div class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                 <p>{{ $user->overview }}</p>
                             </div>
                             <p class='font-extrabold'>SNSがあればリンクなど記載</p>
-                            <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                            <div class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                 <p>{{ $user->sns }}</p>
                             </div>
                         @endif

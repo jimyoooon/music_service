@@ -1,9 +1,9 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            <h1>
+                新規登録
+            </h1>
         </x-slot>
 
         <form method="POST" action="{{ route('register') }}">

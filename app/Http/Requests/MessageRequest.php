@@ -24,9 +24,8 @@ class MessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'message.body' => 'required',
-            'message.song_id' => 'required',
-            
+            'message[body]' => 'required',
+
         ];
     }
 }

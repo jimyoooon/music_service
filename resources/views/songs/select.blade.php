@@ -28,20 +28,20 @@
                                     </div>
                                     <div class='gap-4 space-y-4'>
                                         <p class='font-extrabold'>どんな曲を聴きたい？</p>
-                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                             <p>{{ $user->additional_question}}</p>
                                         </div>
                                         <p class='font-extrabold'>今の気分</p>
-                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                             <p>{{ $user->feeling }}</p>
                                         </div>
                                     @if($user->overview && $user->sns)
                                         <p class='font-extrabold'>概要</p>
-                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                             <p>{{ $user->overview }}</p>
                                         </div>
                                         <p class='font-extrabold'>SNS</p>
-                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                        <div class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                             <p>{{ $user->sns }}</p>
                                         </div>
                                     @endif

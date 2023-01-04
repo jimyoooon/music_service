@@ -37,11 +37,11 @@
                         </div>
                         <div class='gap-4 space-y-1'>
                             <p class='font-extrabold'>曲の作成背景</p>
-                            <div class='background bg-gray-100 rounded-lg relative p-5 pt-8'>
+                            <div class='background bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                 <p>{{ $song->background }}</p>
                             </div>
                             <p class='font-extrabold'>曲の概要</p>
-                            <div class='background bg-gray-100 rounded-lg relative p-5 pt-8'>
+                            <div class='background bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                 <p>{{ $song->overview }}</p>
                             </div>
                         </div>

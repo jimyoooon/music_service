@@ -43,7 +43,8 @@
                                                     <img src='{{ $user->image }}' width='100' height='100' class='rounded-full h-16 w-16 flex m-2'>
                                                 </div>
                                                 <div class='sns'>
-                                                    SNS:{{ $user->sns }}
+                                                    <h2 class='font-extrabold'>SNS</h2>
+                                                    <p class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>{{ $user->sns }}</p>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -53,20 +54,20 @@
                                     <div class='gap-4 space-y-1'>
                                         @foreach($users->where('id', $message->user_id) as $user)
                                             <h2 class='font-extrabold'>アーティスト概要</h2>
-                                            <div class='overview bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                            <div class='overview bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                                 <p>{{ $user->overview }}</p>
                                             </div>
                                         @endforeach   
                                         <h2 class='font-extrabold'>メッセージ</h2>
-                                        <div class = "messages bg-gray-100 rounded-lg relative p-5 pt-8">
+                                        <div class = "messages bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300">
                                             <p>{{$message->body}}</p>
                                         </div>
                                         <h2 class='font-extrabold'>曲の作成背景</h2>
-                                        <div class='background bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                        <div class='background bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                             <p>{{ $message->song->background }}</p>
                                         </div>
                                         <h2 class='font-extrabold'>曲の概要</h2>
-                                        <div class='overview bg-gray-100 rounded-lg relative p-5 pt-8'>
+                                        <div class='overview bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>
                                             <p>{{ $message->song->overview }}</p>
                                         </div>
                                     </div>
