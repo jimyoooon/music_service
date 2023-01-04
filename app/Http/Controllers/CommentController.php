@@ -16,7 +16,7 @@ use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, Comment $comment, Song $song)
+    public function store(CommentRequest $request, Comment $comment, Song $song)
     {
         $comment = new Comment();
         $comment->song_id = $song->id;
@@ -45,7 +45,7 @@ class CommentController extends Controller
         //return view('songs/show');
     //}
 
-    public function store_second(Request $request, Song $song, Message $message)
+    public function store_second(CommentRequest $request, Song $song, Message $message)
     {
         
         $comment = new Comment();

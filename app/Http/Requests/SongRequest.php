@@ -28,6 +28,7 @@ class SongRequest extends FormRequest
             'song.background' => 'required|string|max:1000',
             'song.overview' => 'required|string|max:1000',
             'movie' => 'required',
+            'statuses_array' => 'required',
 
             //
         ];

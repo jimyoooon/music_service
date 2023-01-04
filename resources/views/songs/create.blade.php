@@ -61,6 +61,7 @@
                                                 </input>
                                             </label>
                                         @endforeach
+                                        <p class="statuses__error" style="color:red">{{ $errors->first('statuses_array') }}</p>
                                 </div>
                                 <div class='flex flex-row-reverse'>
                                     <button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-2 py-2 text-base font-medium text-white">アップロード</button>

@@ -30,36 +30,24 @@ class SendController extends Controller
     
     public function store(Request $request, Message $message) 
     {
-        //$test = $request->session()->get('send_user_id');
-        //$user = Auth::id();                     //user_id取得
-        //$input_message = $request['message'];
-        //$message->send_user_id = $test;
-
-        //$message->fill($input_message)->save(); 
-        
-        //return redirect('/index');
-        
         $now_date = date('Y-m-d');
-        //dd($now_date);
         $user_count = Message::where('user_id', auth()->user()->id)->where('created_at', 'like', $now_date.'%')->count();
-        //dd($user_count);
         if($user_count <= 9){
-        $validated = $request->validateWithBag('error', [
-        'message.song_id' => 'required',
-        'message.body' => 'required',
-        ]);
+        //$validated = $request->validateWithBag('error', [
+        //'message.song_id' => 'required',
+        //'message.body' => 'required',
+        //]);
         
         $test = session('send_user_id');
         $user = Auth::id();
         $message->user_id = $user;//user_id取得
         $input_message = $request['message'];
-        //dd($input_message);
         $message->send_user_id = $test;
 
         $message->fill($input_message)->save(); 
         
 
-        return redirect('/index')->withErrors($validated, 'error');       
+        return redirect('/index');//->withErrors($validated, 'error');       
         }else{
             return redirect('/home');
             
