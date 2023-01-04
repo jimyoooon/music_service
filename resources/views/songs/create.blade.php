@@ -35,6 +35,7 @@
                                                 <h1 class='text-red-500'>注意事項</h1>
                                                 <p>・動画付きのファイルである</p>
                                                 <p>・動画が画像でも可</p>
+                                                <p>・150MB以上だと投稿できません</p>
                                             </div>
                                             <div>
                                                 <input type='file' name='movie' value='{{ old("movie")}}'>
