@@ -33,11 +33,6 @@ class SendController extends Controller
         $now_date = date('Y-m-d');
         $user_count = Message::where('user_id', auth()->user()->id)->where('created_at', 'like', $now_date.'%')->count();
         if($user_count <= 9){
-        //$validated = $request->validateWithBag('error', [
-        //'message.song_id' => 'required',
-        //'message.body' => 'required',
-        //]);
-        
         $test = session('send_user_id');
         $user = Auth::id();
         $message->user_id = $user;//user_id取得
@@ -47,9 +42,9 @@ class SendController extends Controller
         $message->fill($input_message)->save(); 
         
 
-        return redirect('/index');//->withErrors($validated, 'error');       
+        return redirect('/index');//->withErrors($validated, 'error');  
         }else{
-            return redirect('/home');
+            return redirect('/select')->with('successMessage', '一日10件の投稿回数を超えたため送信できません。24時にリセットされます');
             
         }
     }

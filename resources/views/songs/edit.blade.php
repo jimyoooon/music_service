@@ -54,7 +54,7 @@
                                         <h2 class='font-extrabold'>[ステータス]</h2>
                                             @foreach($statuses as $status)
                                                 <label>
-                                                    <input type="radio" value='{{ $status->id}}' name="statuses_array[]">
+                                                    <input type="radio" value='{{ $status->id}}' name="statuses_array[]" required>
                                                         {{$status->name}}
                                                     </input>
                                                 </label>
