@@ -25,7 +25,14 @@
                     </div>
                 </header>
             @endif
-
+            
+            <!-- フラッシュメッセージ-->
+            @if (session('successMessage'))
+              <div class="alert alert-success text-center text-red-500 font-extrabold">
+                {{ session('successMessage') }}
+              </div> 
+            @endif
+            
             <!-- Page Content -->
             <main class='bg-stone-300'>
                 {{ $slot }}
