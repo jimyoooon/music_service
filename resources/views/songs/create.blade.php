@@ -53,16 +53,24 @@
                                             </label>
                                         @endforeach         
                                 </div>
-                                <div class="status">
-                                    <h2 class='font-extrabold'>ステータス</h2>
-                                        @foreach($statuses as $status)
-                                            <label>
-                                                <input type="radio" value='{{ $status->id}}' name="statuses_array[]">
-                                                    {{$status->name}}
-                                                </input>
-                                            </label>
-                                        @endforeach
-                                        <p class="statuses__error" style="color:red">{{ $errors->first('statuses_array') }}</p>
+                                <div class="status grid md:grid-cols-2 gap-8 lg:gap-12">
+                                    <div>
+                                        <h2 class='font-extrabold'>ステータス</h2>
+                                            @foreach($statuses as $status)
+                                                <label>
+                                                    <input type="radio" value='{{ $status->id}}' name="statuses_array[]">
+                                                        {{$status->name}}
+                                                    </input>
+                                                </label>
+                                            @endforeach
+                                            <p class="statuses__error" style="color:red">{{ $errors->first('statuses_array') }}</p>
+                                    </div>
+                                    <div style="border: solid 3px #333; ">
+                                        <h1 class='text-red-500'>注意事項</h1>
+                                        <p>・編曲可にした場合、著作権等に十分気を付けてください</p>
+                                        <p>・基本的に曲の編曲をする場合、原作品の著作者に許諾を得る必要があります</p>
+                                        <p>・リスナーが編曲した曲を今後も自分の曲として使用する場合も著作権が発生する場合があります。</p>
+                                    </div>
                                 </div>
                                 <div class='flex flex-row-reverse'>
                                     <button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-2 py-2 text-base font-medium text-white">アップロード</button>

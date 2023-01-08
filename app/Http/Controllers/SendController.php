@@ -38,7 +38,7 @@ class SendController extends Controller
         //送信する際に取り出してくるMessageテーブルのuser_idと同じ日付のcreated_atの二つが1日に10件以上データベースに保存されている場合、処理が制限される
         $now_date = date('Y-m-d');
         $user_count = Message::where('user_id', auth()->user()->id)->where('created_at', 'like', $now_date.'%')->count();
-        if($user_count <= 9){
+        if($user_count <= 10){
             //function sendで保持していたsession
             $test = session('send_user_id');
             $user = Auth::id();
