@@ -32,7 +32,7 @@
                                     </div>
                                     <div class='additional_questionus'>
                                         <h2>どんな曲が聞きたい？</h2>
-                                        <textarea type='text' name='user[additional_question]' value="{{ $user->additional_question }}" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{old("user[additional_question]", $user->additional_question) }}</textarea>
+                                        <textarea type='text' name='user[additional_question]' placeholder='（例）OO（好きなアーティスト）の曲に似ている曲・心が晴れる曲・ドライブで聞きたい曲など' value="{{ $user->additional_question }}" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{old("user[additional_question]", $user->additional_question) }}</textarea>
                                         <p class="additional_question__error" style="color:red">{{ $errors->first('user.additional_question') }}</p>
                                     </div>
                                     <div class='feeling'>

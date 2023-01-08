@@ -34,6 +34,7 @@
                                                 <p class='inline-flex items-center justify-center rounded-md border border-transparent bg-sky-600 px-2 py-2 text-base font-medium text-white'>{{ $status->name }}</p> 
                                             @endforeach
                                         </div>
+                                        <!--メッセージで送られてくるデータの中にアーティストのプロフィール情報も一緒に表示-->
                                         <div class='users'>
                                             @foreach($users->where('id', $message->user_id) as $user)
                                                 <div class='user_name flex justify-center font-semibold'>
@@ -90,9 +91,10 @@
                                         </form>
                                     </div>
                                 </div>
-                                @if($comments)                                  
+                                @if($comments) 
+                                    <!--Messageテーブルのsong_idとCommentテーブルのsong_idが一致した場合、その曲に対するコメントのみ表示-->
                                     <div class="w-300 flex flex-col space-y-4 overflow-scroll p-3 h-64 bg-gray-100 rounded-lg relative p-5 pt-8">
-                                        @foreach($comments->where('song_id', $message->song_id) as $comment)  <!--foreachで先にmessageを回してるからそれに関連するcommentを回すときにwhereで制限かける。上でforeach回してもうmessageに関連ついているからmessage->commentとかはしなくていい-->
+                                        @foreach($comments->where('song_id', $message->song_id) as $comment) 
                                             <div>
                                                 <li>{{ $comment->body }}</li>
                                                 @if($comment->audio)

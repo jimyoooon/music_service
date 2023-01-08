@@ -20,12 +20,12 @@
                                 </div>
                                 <div class="body">
                                     <h2 class='font-extrabold'>曲の作成背景</h2>
-                                    <textarea name="song[background]" placeholder="曲の作成背景" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{old("song.background") }}</textarea>
+                                    <textarea name="song[background]" placeholder="投稿した曲がどのようにして作成されたのかを記載（例）失恋した時・人生の節目の時に作成" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{old("song.background") }}</textarea>
                                     <p class="background__error" style="color:red">{{ $errors->first('song.background') }}</p>
                                 </div>
                                 <div class="body">
                                     <h2 class='font-extrabold'>曲の概要</h2>
-                                    <textarea name="song[overview]" placeholder="曲の概要" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{old("song.overview") }}</textarea>
+                                    <textarea name="song[overview]" placeholder="投稿した曲についての技術的なことを記載（例）コード進行・使用音源などの紹介" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{old("song.overview") }}</textarea>
                                     <p class="overview__error" style="color:red">{{ $errors->first('song.overview') }}</p>
                                 </div>
                                 <div class="body">

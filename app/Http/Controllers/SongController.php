@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Cloudinary; 
 use App\Models\Status;
 use App\Models\Comment;
-use App\Models\Reply;
 use App\Models\Message;
 use App\Http\Requests\SongRequest;
 
@@ -20,9 +19,9 @@ class SongController extends Controller
 {
     public function index(Comment $comment, Song $song, User $user)
     {
-        
+        //ログインユーザーに関連する投稿データの表示
         $auth = auth()->user()->id;
-        $user = User::where('id', $auth)->first();  //usersテーブルの中でidとログインユーザーのidが一致しているモノの一番初めのユーザーを取ってくる＝一人しかいない
+        $user = User::where('id', $auth)->first(); 
         $song = $user->songs()->latest()->paginate(5);
         return view('songs/index')->with(['songs' => $song, 'comments' => $comment->get()->sortByDesc('created_at')]);
 
@@ -41,34 +40,26 @@ class SongController extends Controller
     
     public function store(SongRequest $request, Song $song)
     {
+        //中間テーブルmelody_songリレーション
         $input_song = $request['song'];
         $input_melodies = $request->melodies_array; 
         $song->fill($input_song)->save();
-        $song->melodies()->attach($input_melodies);  //中間テーブルmelodyタグリレーション
+        $song->melodies()->attach($input_melodies); 
         
-        
+        //中間テーブルsong_statusリレーション
         $input_song = $request['song'];
         $input_statuses = $request->statuses_array;
         $song->fill($input_song)->save();
-        $song->statuses()->attach($input_statuses); //中間テーブルstatusタグリレーション
+        $song->statuses()->attach($input_statuses); 
         
+        //中間テーブルsong_userリレーション(user(アーティストとリスナー)は互いに多対多の関係であり、userとsong(投稿データ)も多対多の関係)
         $user = Auth::id();
-        $song->users()->attach($user);  //中間テーブルsong_userリレーション
+        $song->users()->attach($user);  
         
-
-
+        //動画登録:cloudinaryへ保存
         $input = $request['song'];
-        //if($request->hasFile('image')){
-            //$image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); 
-            //$input += ['image' => $image_url];
-        //}
-        //if($request->hasFile('audio')){
-            //$audio_url = Cloudinary::upload($request->file('audio')->getRealPath(), ['resource_type' => 'video',])->getSecurePath(); 
-            //$input += ['audio' => $audio_url];   
-        //}
         $movie_url = Cloudinary::upload($request->file('movie')->getRealPath(), ['resource_type' => 'video',])->getSecurePath(); 
         $input += ['movie' => $movie_url];
-
         $song->fill($input)->save();
         
         return redirect('/songs/' . $song->id);
@@ -81,24 +72,20 @@ class SongController extends Controller
     
     public function update(Request $request, Song $song, Melody $melody, Status $status)
     {
+        //中間テーブルmelody_songリレーション
         $input_song = $request['song'];
         $input_melodies = $request->melodies_array; 
         $song->fill($input_song)->save();
-        $song->melodies()->sync($input_melodies);  //中間テーブルmelodyタグリレーション
+        $song->melodies()->sync($input_melodies); 
         
-        
+        //中間テーブルsong_statusリレーション
         $input_song = $request['song'];
         $input_statuses = $request->statuses_array;
         $song->fill($input_song)->save();
-        $song->statuses()->sync($input_statuses); //中間テーブルstatusタグリレーション
+        $song->statuses()->sync($input_statuses); 
         
-        //$user = Auth::id();
-        //$song->users()->attach($user);  //中間テーブルsong_userリレーション
+        //動画登録:cloudinaryへ保存
         $input = $request['song'];
-        //if($request->hasFile('image')){
-            //$image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); 
-            //$input += ['image' => $image_url];
-        //}
         if($request->hasFile('movie')){
             $movie_url = Cloudinary::upload($request->file('movie')->getRealPath(), ['resource_type' => 'video',])->getSecurePath(); 
             $input += ['movie' => $movie_url];
@@ -111,7 +98,7 @@ class SongController extends Controller
     
     public function select(User $user)
     {   
-        //$user=User::where('overview', null)->where('sns', null)->get();
+        //ログインユーザー以外のユーザー情報(プロフィール記入時の情報)を表示
         $user = User::where("id" , "!=" , Auth::user()->id);
         return view('songs/select')->with(['users'=> $user->get()]);
     }
