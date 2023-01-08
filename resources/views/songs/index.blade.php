@@ -35,6 +35,7 @@
                                                 <div class='name'> 
                                                     <p class='font-extrabold text-2xl'>{{ $song->name }}</p>
                                                 </div>
+                                                <!--中間テーブルリレーション-->
                                                 <div class='melody'>
                                                     @foreach($song->melodies as $melody)   
                                                         <p class='font-extrabold'>[今風・エモい・楽しい・シネマティック]</p>
@@ -82,8 +83,9 @@
                                     </div>
                                 </div>
                                 @if($comments)
+                                    <!--SongテーブルのidとCommentテーブルのsong_idが一致した場合、その曲に対するコメントのみ表示-->
                                     <div class="w-300 flex flex-col space-y-4 overflow-scroll p-3 h-64 bg-gray-100 rounded-lg relative p-5 pt-8">
-                                        @foreach($comments->where('song_id', $song->id) as $comment)         <!--foreachで先にmessageを回してるからそれに関連するcommentを回すときにwhereで制限かける。上でforeach回してもうmessageに関連ついているからmessage->commentとかはしなくていい-->
+                                        @foreach($comments->where('song_id', $song->id) as $comment)
                                             <div>
                                                 <li>{{ $comment->body }}</li>
                                                 @if($comment->audio)
@@ -94,7 +96,7 @@
                                             </div>
                                         @endforeach
                                     </div>    
-                                @endif                             <!--コメント機能  -->
+                                @endif                          
                                 
                                 <p>-------------------------------</p>
                             @endforeach
