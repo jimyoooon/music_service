@@ -40,9 +40,11 @@
                                                 <div class='user_name flex justify-center font-semibold'>
                                                     {{ $user->name }}
                                                 </div>
-                                                <div class='image flex justify-center'>
-                                                    <img src='{{ $user->image }}' width='100' height='100' class='rounded-full h-16 w-16 flex m-2'>
-                                                </div>
+                                                @if($user->image)
+                                                    <div class='image flex justify-center'>
+                                                        <img src='{{ $user->image }}' width='100' height='100' class='rounded-full h-16 w-16 flex m-2'>
+                                                    </div>
+                                                @endif
                                                 <div class='sns'>
                                                     <h2 class='font-extrabold'>SNS</h2>
                                                     <p class='bg-gray-100 rounded-lg relative p-5 pt-8 rounded-lg border border-gray-300'>{{ $user->sns }}</p>
